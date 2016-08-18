@@ -632,14 +632,9 @@ class BaseSession(SessionInterface):
       # Ensure any changes to the graph are reflected in the runtime.
       self._extend_graph()
       with errors.raise_exception_on_not_ok_status() as status:
-        if options:
-          return tf_session.TF_Run(session, options,
-                                   feed_dict, fetch_list, target_list,
-                                   status, run_metadata)
-        else:
-          return tf_session.TF_Run(
-              session, None, feed_dict, fetch_list, target_list, status,
-              None)
+        return tf_session.TF_Run(session, options,
+                                 feed_dict, fetch_list, target_list,
+                                 status, run_metadata)
 
     def _prun_fn(session, handle, feed_dict, fetch_list):
       if target_list:
@@ -905,10 +900,12 @@ class InteractiveSession(BaseSession):
 
     super(InteractiveSession, self).__init__(target, graph, config)
     self._default_session = self.as_default()
+    self._default_session.enforce_nesting = False
     self._default_session.__enter__()
     self._explicit_graph = graph
     if self._explicit_graph is not None:
       self._default_graph = graph.as_default()
+      self._default_graph.enforce_nesting = False
       self._default_graph.__enter__()
 
   def close(self):

@@ -50,6 +50,7 @@ cc_library(
         "@farmhash_archive//:farmhash",
         "@jpeg_archive//:jpeg",
         "@png_archive//:png",
+        "@highwayhash//:sip_hash",
         "@re2//:re2",
         "//tensorflow/core:protos_cc",
     ],
@@ -94,6 +95,12 @@ cc_library(
     deps = [
         "//third_party/gpus/cuda:cudart",
     ],
+)
+
+filegroup(
+    name = "android_srcs",
+    srcs = glob(["*.h"]),
+    visibility = ["//visibility:public"],
 )
 
 filegroup(
