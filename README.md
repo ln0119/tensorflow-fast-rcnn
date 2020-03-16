@@ -1,6 +1,6 @@
 This is an initial attempt at implementing Fast-RCNN in Tensorflow. It's still a work in progress - the ROI pooling op is pretty much finished, but the full Fast-RCNN demo is still being completed. 
 
-The challenge in doing this (as of when it was started, in May/June 2016, at least) is that Tensorflow doesn't have an implementation of the ROI pooling operation which does a good bit of the magic in Fast-RCNN (and Faster-RCNN). Without this op, it's pretty much impossible to use these algorithms in Tensorflow.
+The challenge in doing this (as of when it was started, in May/June 2016, at least) is that Tensorflow doens't have an implementation of the ROI pooling operation which does a good bit of the magic in Fast-RCNN (and Faster-RCNN). Without this op, it's pretty much impossible to use these algorithms in Tensorflow.
 
 In this fork of Tensorflow, I've implemented the ROI pooling layer for CPU and GPU, and also the gradient operation for both (also CPU and GPU). The code for the forward op is [here](https://github.com/zplizzi/tensorflow-fast-rcnn/blob/master/tensorflow/core/user_ops/roi_pooling_op.cc). The gradient op is [here](https://github.com/zplizzi/tensorflow-fast-rcnn/blob/master/tensorflow/core/user_ops/roi_pooling_op_grad.cc). The GPU implementations of both are [here](https://github.com/zplizzi/tensorflow-fast-rcnn/blob/master/tensorflow/core/user_ops/roi_pooling_op.cu.cc).
 
